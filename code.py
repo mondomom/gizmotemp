@@ -36,7 +36,7 @@ inner_palette[0] = 0x00FFFF  # Cyan
 inner_sprite = displayio.TileGrid(inner_bitmap, pixel_shader=inner_palette, x=20, y=20)
 splash.append(inner_sprite)
 
-# Set up the fond
+# Set up the font
 font_file = "/fonts/LeagueSpartan_Bold_16.bdf"
 font = bitmap_font.load_font(font_file)
 
@@ -53,10 +53,10 @@ thermistor = adafruit_thermistor.Thermistor(
     board.TEMPERATURE, 10000, 10000, 25, 3950)
 
 while True:
-    temp_c = round(thermistor.temperature, 2)
+    temp_c = round(thermistor.temperature, 1) # round to one decimal place (saves space!)
     temp_f = thermistor.temperature * 9 / 5 + 32
     print("Temperature is: %f C and %f F" % (temp_c, temp_f))
     text = ("Temp:\n" + str(temp_c) + " C")
     #text = ("Current Temp:\n  " + temp_c + " C")
     text_area.text = text
-    time.sleep(1)
+    time.sleep(30)
